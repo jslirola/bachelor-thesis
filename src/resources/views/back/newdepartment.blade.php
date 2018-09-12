@@ -17,7 +17,7 @@
 </div>
 <div class="form-group">
 {{ Form::label('webDepartamento', 'Web:') }}
-<input class="form­-control" required="" name="webDepartamento" value="" id="webDepartamento" type="text">
+<input class="form­-control" name="webDepartamento" value="" id="webDepartamento" type="text">
 </div>
 <div class="form-group">
 {{ Form::submit('Crear departamento', array('class' => 'btn btn-primary btn-sm')) }}
