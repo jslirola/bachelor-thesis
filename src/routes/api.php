@@ -22,7 +22,7 @@ use App\Models\Trabajo;
 |
 */
 
-Route::get('/getFreeProjects', function (Request $request) {
+Route::get('/getFreeProjects', function () {
     return response()->json(Trabajo::getFreeProjects()->get(['tituloTrabajo','detalleTrabajo','tipoTrabajo']), 200);
 });
 
@@ -34,16 +34,17 @@ Route::post('/getStudiesByCenter', function (Request $request) {
 		if($offer->count() > 0) {
 		    $output = '<table id="table-small" class="table table-striped table-sm">';
 		    $c = 0;
-			foreach ($offer->get() as $key => $v) {
-				if($c==0) $output .= '<tr><td>';
-				elseif($c%3==0) $output .= '</tr><tr><td>';
-				else $output .= '</td><td>';
+			foreach ($offer->get() as $v) {
+				if($c==0) { $output .= '<tr><td>';
+				} elseif($c%3==0) { $output .= '</tr><tr><td>';
+				} else { $output .= '</td><td>'; }
 				$output .= "<strong>".($c+1). ".</strong> ". $v->study->getFullName();
 				$c++;
 			}
 			$output .= '</tr></table>';
-		} else
-			$output = "Actualmente no oferta ninguna titulación."; // TODO: Change with messages
+		} else {
+            $output = "Actualmente no oferta ninguna titulación."; // TODO: Change with messages
+        }
 	}
     return response()->json(["html" => $output], 200);
 
@@ -65,8 +66,9 @@ Route::post('/getCourtMembers', function (Request $request) {
 
 			}
 			$output .= '</table>';
-		} else
-			$output = "No se encuentran los miembros del tribunal."; // TODO: Change with messages
+		} else {
+            $output = "No se encuentran los miembros del tribunal."; // TODO: Change with messages
+        }
 	}
     return response()->json(["html" => $output], 200);
 
